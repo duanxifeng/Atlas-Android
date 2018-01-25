@@ -299,12 +299,9 @@ public class ComposeBar extends FrameLayout implements TextWatcher {
 
         if (sender.getIcon() != null) {
             Drawable iconDrawable = ContextCompat.getDrawable(getContext(), sender.getIcon());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                DrawableCompat.setTint(iconDrawable, getResources().getColor(R.color.layer_ui_icon_enabled));
-            } else {
-                iconDrawable.mutate().setColorFilter(getResources().getColor(R.color.layer_ui_icon_enabled), PorterDuff.Mode.SRC_IN);
-            }
-            binding.title.setCompoundDrawablesWithIntrinsicBounds(iconDrawable, null, null, null);
+            Drawable wrappedDrawable = DrawableCompat.wrap(iconDrawable);
+            DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.layer_ui_icon_enabled));
+            binding.title.setCompoundDrawablesWithIntrinsicBounds(wrappedDrawable, null, null, null);
         }
 
         menuLayout.addView(binding.getRoot());
