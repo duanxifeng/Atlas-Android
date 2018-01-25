@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -298,7 +299,11 @@ public class ComposeBar extends FrameLayout implements TextWatcher {
 
         if (sender.getIcon() != null) {
             Drawable iconDrawable = ContextCompat.getDrawable(getContext(), sender.getIcon());
-            DrawableCompat.setTint(iconDrawable, getResources().getColor(R.color.layer_ui_icon_enabled));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                DrawableCompat.setTint(iconDrawable, getResources().getColor(R.color.layer_ui_icon_enabled));
+            } else {
+                iconDrawable.mutate().setColorFilter(getResources().getColor(R.color.layer_ui_icon_enabled), PorterDuff.Mode.SRC_IN);
+            }
             binding.title.setCompoundDrawablesWithIntrinsicBounds(iconDrawable, null, null, null);
         }
 
