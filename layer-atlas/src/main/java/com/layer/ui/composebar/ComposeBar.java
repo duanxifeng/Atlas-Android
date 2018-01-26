@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -299,9 +298,9 @@ public class ComposeBar extends FrameLayout implements TextWatcher {
 
         if (sender.getIcon() != null) {
             Drawable iconDrawable = ContextCompat.getDrawable(getContext(), sender.getIcon());
-            Drawable wrappedDrawable = DrawableCompat.wrap(iconDrawable);
-            DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.layer_ui_icon_enabled));
-            binding.title.setCompoundDrawablesWithIntrinsicBounds(wrappedDrawable, null, null, null);
+            iconDrawable = DrawableCompat.wrap(iconDrawable);
+            DrawableCompat.setTint(iconDrawable, getResources().getColor(R.color.layer_ui_icon_enabled));
+            binding.title.setCompoundDrawablesWithIntrinsicBounds(iconDrawable, null, null, null);
         }
 
         menuLayout.addView(binding.getRoot());
